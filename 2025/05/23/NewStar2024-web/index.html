@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/2025/05/23/NewStar2024-web/pangbai1_4.png">
 <meta property="og:image" content="http://example.com/2025/05/23/NewStar2024-web/headach3.png">
 <meta property="article:published_time" content="2025-05-23T02:45:15.000Z">
-<meta property="article:modified_time" content="2025-06-02T13:18:20.642Z">
+<meta property="article:modified_time" content="2025-06-02T13:24:43.588Z">
 <meta property="article:author" content="Lysander-xu">
 <meta property="article:tag" content="ctf">
 <meta property="article:tag" content="web">
@@ -312,13 +312,8 @@
 <p>level3：post传say&#x3D;hello</p>
 <p>level4：ua头的浏览器引擎改为Papa，post传say&#x3D;玛卡巴卡阿卡哇卡米卡玛卡呣</p>
 <p>level5：用PATCH方法上传一个zip文件，bp抓个包，然后去修改请求包，主要修改部分如下</p>
-<blockquote>
-<p>PATCH	#将请求方法改为PATCH</p>
-<p>Content-Type: multipart&#x2F;form-data; boundary&#x3D;fileupload	#将请求体的数据类型改为了多部分数据，并加了一个字段间的分隔符</p>
-<p>–fileupload	#上传say&#x3D;玛卡巴卡阿卡哇卡米卡玛卡呣<br>Content-Disposition: form-data; name&#x3D;”say”</p>
-<p>玛卡巴卡阿卡哇卡米卡玛卡呣<br>–fileupload	#上传zip文件<br>Content-Disposition: form-data; name&#x3D;”file”; filename&#x3D;”patch.zip”</p>
-<p>123<br>–fileupload–</p>
-</blockquote>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs nix">PATCH	<span class="hljs-comment">#将请求方法改为PATCH</span><br><br><span class="hljs-params">Content-Type:</span> multipart<span class="hljs-symbol">/form-data</span>; <span class="hljs-attr">boundary</span><span class="hljs-operator">=</span>fileupload	<span class="hljs-comment">#将请求体的数据类型改为了多部分数据，并加了一个字段间的分隔符</span><br><br><span class="hljs-operator">-</span>-fileupload	<span class="hljs-comment">#上传say=玛卡巴卡阿卡哇卡米卡玛卡呣</span><br><span class="hljs-params">Content-Disposition:</span> form-data; <span class="hljs-attr">name</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;say&quot;</span><br><br>玛卡巴卡阿卡哇卡米卡玛卡呣<br><span class="hljs-operator">-</span>-fileupload	<span class="hljs-comment">#上传zip文件</span><br><span class="hljs-params">Content-Disposition:</span> form-data; <span class="hljs-attr">name</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;file&quot;</span>; <span class="hljs-attr">filename</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;patch.zip&quot;</span><br><br><span class="hljs-number">123</span><br><span class="hljs-operator">-</span>-fileupload--<br></code></pre></td></tr></table></figure>
+
 <p>boundary(字段分隔符)是一个唯一字符，正文的每一部分用–boundary开头，用–boundary–结尾</p>
 <p>bp输入中文只需将需要输入的中文保存为一个文件，然后在输入位置右键选择从文件中粘贴即可</p>
 <p>得到一个token</p>
