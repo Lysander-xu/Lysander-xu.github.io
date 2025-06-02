@@ -341,7 +341,7 @@
 <h2 id="ezssrf1-0"><a href="#ezssrf1-0" class="headerlink" title="ezssrf1.0"></a>ezssrf1.0</h2><p>dirsearch发现&#x2F;flag且可以访问，访问后得到提示“flag in FFFFF11111AAAAAggggg.php”，直接访问FFFFF11111AAAAAggggg.php得到flag</p>
 <p>看了官方的wp说这一题本应该只允许本地访问，所以预期应该是要利用畸形的url使parse_url无法识别host，从而绕过检查</p>
 <blockquote>
-<p>?url&#x3D;http:<a href="mailto:&#x78;&#117;&#64;&#x31;&#x32;&#55;&#46;&#48;&#x2e;&#x30;&#46;&#x31;">xu@127.0.0.1</a>&#x2F;flag</p>
+<p>?url&#x3D;http:<a href="mailto:&#120;&#x75;&#64;&#x31;&#x32;&#x37;&#x2e;&#x30;&#x2e;&#x30;&#x2e;&#49;">xu@127.0.0.1</a>&#x2F;flag</p>
 </blockquote>
 <p><img src="/2025/05/28/2025%E8%BD%A9%E8%BE%95%E6%9D%AF-web/ezssrf.png" srcset="/img/loading.gif" lazyload></p>
 <p>然后再访问FFFFF11111AAAAAggggg.php，拿到flag</p>
