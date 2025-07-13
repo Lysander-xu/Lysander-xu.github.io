@@ -1,0 +1,744 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Lysander-xu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="generalencodingASCII ASCII 是一种 7 位编码标准，允许使用整数 0-127 表示文本。 在 Python 中，该 chr() 函数可用于将 ASCII 序数转换为字符（该 ord() 函数的作用相反）。  12345678910arr &#x3D; [99, 114, 121, 112, 116, 111, 123, 65, 83, 67, 73, 73, 95, 112, 11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cryptohack">
+<meta property="og:url" content="http://example.com/2025/07/12/cryptohack/index.html">
+<meta property="og:site_name" content="blogs of Lysander-xu">
+<meta property="og:description" content="generalencodingASCII ASCII 是一种 7 位编码标准，允许使用整数 0-127 表示文本。 在 Python 中，该 chr() 函数可用于将 ASCII 序数转换为字符（该 ord() 函数的作用相反）。  12345678910arr &#x3D; [99, 114, 121, 112, 116, 111, 123, 65, 83, 67, 73, 73, 95, 112, 11">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/07/12/cryptohack/xor.png">
+<meta property="article:published_time" content="2025-07-12T11:54:09.000Z">
+<meta property="article:modified_time" content="2025-07-13T13:39:44.326Z">
+<meta property="article:author" content="Lysander-xu">
+<meta property="article:tag" content="crypto">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2025/07/12/cryptohack/xor.png">
+  
+  
+  
+  <title>cryptohack - blogs of Lysander-xu</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"r9vmK9fMUcr65tyIT646Ea7h-MdYXbMMI","app_key":"xd0pvfqXwvUGMywmXYH6JDqn","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>blogs of Lysander-xu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="cryptohack"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-12 19:54" pubdate>
+          2025年7月12日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          964 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">cryptohack</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="general"><a href="#general" class="headerlink" title="general"></a>general</h2><h3 id="encoding"><a href="#encoding" class="headerlink" title="encoding"></a>encoding</h3><h4 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h4><blockquote>
+<p>ASCII 是一种 7 位编码标准，允许使用整数 0-127 表示文本。</p>
+<p>在 Python 中，该 <code>chr()</code> 函数可用于将 ASCII 序数转换为字符（该 <code>ord()</code> 函数的作用相反）。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python">arr = [<span class="hljs-number">99</span>, <span class="hljs-number">114</span>, <span class="hljs-number">121</span>, <span class="hljs-number">112</span>, <span class="hljs-number">116</span>, <span class="hljs-number">111</span>, <span class="hljs-number">123</span>, <span class="hljs-number">65</span>, <span class="hljs-number">83</span>, <span class="hljs-number">67</span>, <span class="hljs-number">73</span>, <span class="hljs-number">73</span>, <span class="hljs-number">95</span>, <span class="hljs-number">112</span>, <span class="hljs-number">114</span>, <span class="hljs-number">49</span>, <span class="hljs-number">110</span>, <span class="hljs-number">116</span>, <span class="hljs-number">52</span>, <span class="hljs-number">98</span>, <span class="hljs-number">108</span>, <span class="hljs-number">51</span>, <span class="hljs-number">125</span>]<br><br>flag = <span class="hljs-string">&quot;&quot;</span><br><br><span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> arr:<br>    flag += <span class="hljs-built_in">chr</span>(c)<br><br><span class="hljs-built_in">print</span>(flag)<br><br><span class="hljs-comment">#  crypto&#123;ASCII_pr1nt4bl3&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="Hex"><a href="#Hex" class="headerlink" title="Hex"></a>Hex</h4><blockquote>
+<p>当我们加密某些内容时，生成的密文通常包含不可打印的 ASCII 字符的字节。如果我们想共享我们的加密数据，通常会将其编码为更用户友好且在不同系统之间可移植的数据。十六进制可以以这种方式用于表示 ASCII 字符串。</p>
+<p>在 Python 中，该 <code>bytes.fromhex()</code> 函数可用于将十六进制转换为字节。可以在字节字符串上调用 <code>.hex()</code> instance 方法以获取十六进制表示形式。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-built_in">bytes</span>.fromhex(<span class="hljs-string">&quot;63727970746f7b596f755f77696c6c5f62655f776f726b696e675f776974685f6865785f737472696e67735f615f6c6f747d&quot;</span>))<br><br><span class="hljs-comment">#  b&#x27;crypto&#123;You_will_be_working_with_hex_strings_a_lot&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h4><blockquote>
+<p>另一种常见的编码方案是 Base64，它允许我们使用 64 个字符的字母将二进制数据表示为 ASCII 字符串。Base64 字符串的一个字符编码 6 个二进制数字 （bit），因此 Base64 的 4 个字符编码 3 个 8 位字节。</p>
+<p>Base64 是在线最常用的，因此图像等二进制数据可以轻松包含在 HTML 或 CSS 文件中。</p>
+<p>在 Python 中，使用 <code>import base64</code> 导入 base64 模块后，可以使用该 <code>base64.b64encode()</code> 函数。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> base64<br><br>flag = <span class="hljs-built_in">bytes</span>.fromhex(<span class="hljs-string">&quot;72bca9b68fc16ac7beeb8f849dca1d8a783e8acf9679bf9269f7bf&quot;</span>)<br><br><span class="hljs-built_in">print</span>(base64.b64encode(flag))<br><br><span class="hljs-comment">#  b&#x27;crypto/Base+64+Encoding+is+Web+Safe/&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="Bytes-and-Integers"><a href="#Bytes-and-Integers" class="headerlink" title="Bytes and Integers"></a>Bytes and Integers</h4><blockquote>
+<p>像 RSA 这样的加密系统可以处理数字，但消息是由字符组成的。我们应该如何将我们的消息转换为数字，以便可以应用数学运算？</p>
+<p>最常见的方法是获取消息的序号字节，将它们转换为十六进制，然后连接起来。这可以解释为 base-16&#x2F;十六进制数，也可以用 base-10&#x2F;decimal 表示。</p>
+<p>Python 的 PyCryptodome 库使用方法 <code>bytes_to_long()</code> 和 <code>long_to_bytes()</code> 来实现这一点。首先必须安装 PyCryptodome 并使用 <code>from Crypto.Util.number import *</code></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br><br>s = <span class="hljs-number">11515195063862318899931685488813747395775516287289682636499965282714637259206269</span><br><br><span class="hljs-built_in">print</span>(long_to_bytes(s))<br><br><span class="hljs-comment">#  b&#x27;crypto&#123;3nc0d1n6_4ll_7h3_w4y_d0wn&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="Encoding-Challenge"><a href="#Encoding-Challenge" class="headerlink" title="Encoding Challenge"></a>Encoding Challenge</h4><h3 id="XOR"><a href="#XOR" class="headerlink" title="XOR"></a>XOR</h3><h4 id="XOR-Starter"><a href="#XOR-Starter" class="headerlink" title="XOR Starter"></a>XOR Starter</h4><blockquote>
+<p>XOR 是一个按位运算符，如果位相同，则返回 0，否则返回 1。在教科书中，XOR 运算符用 ⊕ 表示，但在大多数挑战和编程语言中，你会看到 <code>^</code> 使用插入符号。</p>
+<p>对于较长的二进制数，我们逐位进行 XOR： <code>0110 ^ 1010 = 1100</code> 。我们可以通过首先将整数从十进制转换为二进制来对整数进行 XOR 运算。我们可以通过首先将每个字符转换为表示 Unicode 字符的整数来对字符串进行 XOR 运算。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">s = <span class="hljs-string">&quot;label&quot;</span><br>new_s = <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> s:<br>    new_s += <span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(c)^<span class="hljs-number">13</span>)<br><span class="hljs-built_in">print</span>(new_s)<br></code></pre></td></tr></table></figure>
+
+<p>用pwntools库中的xor()函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> xor<br><br>s = <span class="hljs-string">&quot;label&quot;</span><br>new_s = xor(s.encode(), <span class="hljs-number">13</span>)<br><span class="hljs-built_in">print</span>(new_s.decode())<br><br><span class="hljs-comment">#  aloha</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="XOR-Properties"><a href="#XOR-Properties" class="headerlink" title="XOR Properties"></a>XOR Properties</h4><blockquote>
+<p>当我们使用 XOR 运算符解决挑战时，我们应该考虑四个主要属性</p>
+<p>交换：A ⊕ B &#x3D; B ⊕ A</p>
+<p>结合：A ⊕ （B ⊕ C） &#x3D; （A ⊕ B） ⊕ C</p>
+<p>单位元：A ⊕ 0 &#x3D; A</p>
+<p>自逆：A ⊕ A &#x3D; 0</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> xor<br><br>key1 = <span class="hljs-built_in">bytes</span>.fromhex(<span class="hljs-string">&quot;a6c8b6733c9b22de7bc0253266a3867df55acde8635e19c73313&quot;</span>)<br>key2_xor_key3 = <span class="hljs-built_in">bytes</span>.fromhex(<span class="hljs-string">&quot;c1545756687e7573db23aa1c3452a098b71a7fbf0fddddde5fc1&quot;</span>)<br>flag_xor_all = <span class="hljs-built_in">bytes</span>.fromhex(<span class="hljs-string">&quot;04ee9855208a2cd59091d04767ae47963170d1660df7f56f5faf&quot;</span>)<br><br>flag = xor(key1, key2_xor_key3, flag_xor_all)<br><br><span class="hljs-built_in">print</span>(flag.decode())<br><br><span class="hljs-comment">#  crypto&#123;x0r_i5_ass0c1at1v3&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="Favourite-byte"><a href="#Favourite-byte" class="headerlink" title="Favourite byte"></a>Favourite byte</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">ciphertext = <span class="hljs-string">&quot;73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d&quot;</span><br>cipher_bytes = <span class="hljs-built_in">bytes</span>.fromhex(ciphertext)<br><br><span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">256</span>):<br>    decrypted = <span class="hljs-string">&#x27;&#x27;</span>.join(<span class="hljs-built_in">chr</span>(b^key) <span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> cipher_bytes)<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;crypto&#x27;</span> <span class="hljs-keyword">in</span> decrypted:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;key:<span class="hljs-subst">&#123;key&#125;</span>, flag:<span class="hljs-subst">&#123;decrypted&#125;</span>&quot;</span>)<br><br><span class="hljs-comment">#  key:16, flag:crypto&#123;0x10_15_my_f4v0ur173_by7e&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="You-either-know-XOR-you-don’t"><a href="#You-either-know-XOR-you-don’t" class="headerlink" title="You either know, XOR you don’t"></a>You either know, XOR you don’t</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python">ciphertext = <span class="hljs-string">&#x27;0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104&#x27;</span><br>cipher_bytes = <span class="hljs-built_in">bytes</span>.fromhex(ciphertext)<br><br>flag_prefix = <span class="hljs-string">b&quot;crypto&#123;&quot;</span><br><br>key_prefix = [c^p <span class="hljs-keyword">for</span> c, p <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(cipher_bytes[:<span class="hljs-number">7</span>], flag_prefix)]<br>key = <span class="hljs-string">&#x27;&#x27;</span>.join(<span class="hljs-built_in">chr</span>(key_prefix[i]) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(key_prefix)))<br><span class="hljs-comment"># print(key) ==&gt; &#x27;myXORke&#x27;</span><br>key += <span class="hljs-string">&#x27;y&#x27;</span><br>key_bytes = key.encode(<span class="hljs-string">&#x27;ascii&#x27;</span>)<br>l= <span class="hljs-built_in">len</span>(key_bytes)<br><br>flag = <span class="hljs-string">&#x27;&#x27;</span>.join(<span class="hljs-built_in">chr</span>(c^(key_bytes[i%l])) <span class="hljs-keyword">for</span> i,c <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(cipher_bytes))<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;key:<span class="hljs-subst">&#123;key&#125;</span>, flag:<span class="hljs-subst">&#123;flag&#125;</span>&quot;</span>)<br><br><span class="hljs-comment">#  key:myXORkey, flag:crypto&#123;1f_y0u_Kn0w_En0uGH_y0u_Kn0w_1t_4ll&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="Lemur-XOR"><a href="#Lemur-XOR" class="headerlink" title="Lemur XOR"></a>Lemur XOR</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>img1 = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;flag.png&quot;</span>)<br>img2 = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;lemur.png&quot;</span>)<br><br><span class="hljs-comment">#  将图像转为Numpy数组</span><br>arr1 = np.array(img1)<br>arr2 = np.array(img2)<br><br><span class="hljs-comment">#  执行异或操作</span><br>res_arr = np.bitwise_xor(arr1, arr2)<br><span class="hljs-comment">#  创建新的图像</span><br>res_img = Image.fromarray(res_arr)<br><br>res_img.save(<span class="hljs-string">&quot;result.png&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/07/12/cryptohack/xor.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/crypto/" class="category-chain-item">crypto</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/crypto/" class="print-no-link">#crypto</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>cryptohack</div>
+      <div>http://example.com/2025/07/12/cryptohack/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Lysander-xu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年7月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/28/LitCTF2025-web/" title="LitCTF2025_web">
+                        <span class="hidden-mobile">LitCTF2025_web</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
