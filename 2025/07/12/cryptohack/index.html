@@ -26,13 +26,13 @@
 <meta property="og:site_name" content="blogs of Lysander-xu">
 <meta property="og:description" content="generalencodingASCII ASCII 是一种 7 位编码标准，允许使用整数 0-127 表示文本。 在 Python 中，该 chr() 函数可用于将 ASCII 序数转换为字符（该 ord() 函数的作用相反）。  12345678910arr &#x3D; [99, 114, 121, 112, 116, 111, 123, 65, 83, 67, 73, 73, 95, 112, 11">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/xor.png">
+<meta property="og:image" content="http://example.com/images/cryptohack/xor.png">
 <meta property="article:published_time" content="2025-07-12T11:54:09.000Z">
-<meta property="article:modified_time" content="2025-07-13T13:39:44.326Z">
+<meta property="article:modified_time" content="2025-10-27T01:33:45.170Z">
 <meta property="article:author" content="Lysander-xu">
 <meta property="article:tag" content="crypto">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/xor.png">
+<meta name="twitter:image" content="http://example.com/images/cryptohack/xor.png">
   
   
   
@@ -350,7 +350,7 @@
 
 <h4 id="Lemur-XOR"><a href="#Lemur-XOR" class="headerlink" title="Lemur XOR"></a>Lemur XOR</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>img1 = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;flag.png&quot;</span>)<br>img2 = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;lemur.png&quot;</span>)<br><br><span class="hljs-comment">#  将图像转为Numpy数组</span><br>arr1 = np.array(img1)<br>arr2 = np.array(img2)<br><br><span class="hljs-comment">#  执行异或操作</span><br>res_arr = np.bitwise_xor(arr1, arr2)<br><span class="hljs-comment">#  创建新的图像</span><br>res_img = Image.fromarray(res_arr)<br><br>res_img.save(<span class="hljs-string">&quot;result.png&quot;</span>)<br></code></pre></td></tr></table></figure>
 
-<p><img src="/xor.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/../images/cryptohack/xor.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
