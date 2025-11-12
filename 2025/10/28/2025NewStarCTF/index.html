@@ -47,7 +47,7 @@
 <meta property="og:image" content="http://example.com/images/2025NewStarCTF/xiaoedemmjh.png">
 <meta property="og:image" content="http://example.com/images/2025NewStarCTF/wgmj.png">
 <meta property="article:published_time" content="2025-10-28T01:12:27.000Z">
-<meta property="article:modified_time" content="2025-10-28T10:51:55.331Z">
+<meta property="article:modified_time" content="2025-11-05T08:22:13.871Z">
 <meta property="article:author" content="Lysander-xu">
 <meta property="article:tag" content="wp">
 <meta name="twitter:card" content="summary_large_image">
@@ -439,8 +439,7 @@
 <p>再用dirsearch扫一下目录，发现<code>.DS_Store</code>，用<a target="_blank" rel="noopener" href="https://github.com/lijiejie/ds_store_exp">ds_store_exp</a>解析.DS_Store文件并递归地下载文件到本地，得到flag文件</p>
 <p><img src="/../images/2025NewStarCTF/xiaoedemmjh.png" srcset="/img/loading.gif" lazyload></p>
 <p>用记事本打开就是flag</p>
-<h3 id="mirror-gate"><a href="#mirror-gate" class="headerlink" title="mirror_gate"></a>mirror_gate</h3><p>查看源码，发现</p>
-<p>![](..&#x2F;images&#x2F;2025NewStarCTF&#x2F;mirror_ gate1.png)</p>
+<h3 id="mirror-gate"><a href="#mirror-gate" class="headerlink" title="mirror_gate"></a>mirror_gate</h3><p>查看源码，发现<code>flag is in flag.php</code>和<code>HINT: c29tZXRoZW5nX2lzX2luXy91cGxvYWRzLw==</code></p>
 <p>解码<code>something_is_in_/uploads/</code>，dirsearch扫一下<code>uploads/</code>目录，发现<code>.htaccess</code></p>
 <p>查看下内容是<code>AddType application/x-httpd-php .webp</code></p>
 <p>接下来上传<code>webp</code>文件，然后尝试去读<code>flag.php</code></p>
@@ -551,6 +550,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/11/06/2025-0xGame/" title="2025_0xGame">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2025_0xGame</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
